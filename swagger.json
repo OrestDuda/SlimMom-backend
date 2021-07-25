@@ -519,34 +519,9 @@
           "notRecommended": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "categories": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "зерновые"
-                  }
-                },
-                "_id": {
-                  "type": "string",
-                  "description": "Item's id",
-                  "example": "32143232436545474"
-                },
-                "title": {
-                  "type": "object",
-                  "properties": {
-                    "ru": {
-                      "type": "string"
-                    },
-                    "ua": {
-                      "type": "string"
-                    }
-                  }
+              "type": "string"
                 }
-              }
-            }
-          },
+              },
           "email": {
             "type": "string",
             "description": "User's email",
@@ -583,26 +558,8 @@
               "bloodType": 1,
               "dailyLimit": 1226,
               "notRecommended": [
-                {
-                  "categories": [
                     "зерновые"
                   ],
-                  "_id": "32143232436545474",
-                  "title": {
-                    "ru": "Гречневая крупа (ядрица) зелёная",
-                    "ua": "Гречана крупа (ядриця) зелена"
-                  }
-                },
-                {
-                  "categories": [
-                    "зерновые"
-                  ],
-                  "_id": "32143232436545474",
-                  "title": {
-                    "ru": "Гречневые хлопья Myllyn Paras для каши",
-                    "ua": "Гречані пластівці Myllyn Paras для каші"
-                  }
-                }],
               "token": "aWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MG",
               "createdAt": "2021-07-25T07:07:45.846Z",
               "_id": "32143232436545474",
@@ -726,62 +683,20 @@
             "description": "User's daily limit",
             "example": "1164"
           },
-          "notRecommended": {
+          "notRecommendedCategories": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "categories": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
+              "type": "string",
                     "example": "зерновые"
                   }
-                },
-                "_id": {
-                  "type": "string",
-                  "description": "Item's id",
-                  "example": "32143232436545474"
-                },
-                "title": {
-                  "type": "object",
-                  "properties": {
-                    "ru": {
-                      "type": "string"
-                    },
-                    "ua": {
-                      "type": "string"
-                    }
-                  }
                 }
-              }
-            }
-          }
-        },
+              },
         "example": {
           "target": {
             "dailyLimit": 1164,
             "notRecommended": [
-              {
-                "categories": [
                   "зерновые"
-                ],
-                "_id": "32143232436545474",
-                "title": {
-                  "ru": "Гречневая крупа (ядрица) зелёная",
-                  "ua": "Гречана крупа (ядриця) зелена"
-                }
-              },
-              {
-                "categories": [
-                  "зерновые"
-                ],
-                "_id": "32143232436545474",
-                "title": {
-                  "ru": "Гречневые хлопья Myllyn Paras для каши",
-                  "ua": "Гречані пластівці Myllyn Paras для каші"
-                }
-              }]
+                ]
           }
         }
       }

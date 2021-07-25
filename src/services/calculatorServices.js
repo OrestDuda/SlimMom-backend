@@ -1,7 +1,7 @@
 const { Product } = require("../models/productsModel");
 const { User } = require("../models/userModel");
 const errors = require("../helpers/errors");
-const { getDailyLimit } = require("../helpers/helpers");
+const { getDailyLimit, getUniqueCategories } = require("../helpers/helpers");
 const {
   newEntryValidation,
   updateEntryValidation,
@@ -18,11 +18,12 @@ const publicCalc = async (body) => {
     {
       ["groupBloodNotAllowed." + bloodType]: { $eq: true },
     },
-    { categories: 1, title: 1 }
+    { categories: 1, _id: 0 }
   );
+  const notRecommendedCategories = getUniqueCategories(notRecommended);
   return {
     dailyLimit,
-    notRecommended,
+    notRecommendedCategories,
   };
 };
 
@@ -39,7 +40,7 @@ const userCalc = async (body, userID) => {
     userFound.desiredWeight = body.desiredWeight;
     userFound.bloodType = body.bloodType;
     userFound.dailyLimit = target.dailyLimit;
-    userFound.notRecommended = target.notRecommended;
+    userFound.notRecommended = target.notRecommendedCategories;
     await userFound.save();
     return target;
   }
@@ -60,19 +61,20 @@ const userCalc = async (body, userID) => {
       {
         ["groupBloodNotAllowed." + bloodType]: { $eq: true },
       },
-      { categories: 1, title: 1 }
+      { categories: 1, _id: 0 }
     );
+    const notRecommendedCategories = getUniqueCategories(notRecommended);
     userFound.currentWeight = body.currentWeight;
     userFound.height = body.height || userFound.height;
     userFound.age = body.age || userFound.age;
     userFound.desiredWeight = body.desiredWeight;
     userFound.dailyLimit = dailyLimit;
     userFound.bloodType = body.bloodType;
-    userFound.notRecommended = notRecommended;
+    userFound.notRecommended = notRecommendedCategories;
     await userFound.save();
     return {
       dailyLimit,
-      notRecommended,
+      notRecommendedCategories,
     };
   }
   userFound.currentWeight = body.currentWeight;

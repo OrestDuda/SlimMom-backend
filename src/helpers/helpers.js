@@ -11,4 +11,11 @@ function getDailyLimit(weight, height, age, desiredWeight) {
   return Math.round(dailyLimit);
 }
 
-module.exports = { getCurrentDate, getDailyLimit };
+function getUniqueCategories(data) {
+  const getCategories = data.map((obj) => obj.categories.toString());
+  const categories = getCategories.filter(
+    (value, index) => getCategories.indexOf(value) === index
+  );
+  return categories;
+}
+module.exports = { getCurrentDate, getDailyLimit, getUniqueCategories };
