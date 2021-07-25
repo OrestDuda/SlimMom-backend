@@ -126,7 +126,7 @@
       }
     },
     "/users/current": {
-      "post": {
+      "get": {
         "tags": ["Auth"],
         "summary": "User current",
         "parameters": [],
@@ -252,41 +252,9 @@
             "content": {}
           }
         }
-      },
-      "get": {
-        "tags": ["Journal"],
-        "summary": "List food items eaten on given day",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "forDay",
-            "required": true,
-            "type": "string",
-            "description": "Date YYYY-M-D"
-          }
-        ],
-        "security": [{ "Bearer": [] }],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MealResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
-          },
-          "401": {
-            "description": "Nor Authorized",
-            "content": {}
-          }
-        }
-      },
+      }
+    },
+    "/journal/{forDay}/{foodItemId}": {
       "delete": {
         "tags": ["Journal"],
         "summary": "Delete food item eaten on given day, if date not provided current day will be used",
@@ -318,6 +286,42 @@
           },
           "401": {
             "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/journal/{forDay}": {
+      "get": {
+        "tags": ["Journal"],
+        "summary": "List food items eaten on given day",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "forDay",
+            "required": true,
+            "type": "string",
+            "description": "Date YYYY-M-D"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MealResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Nor Authorized",
             "content": {}
           }
         }
@@ -515,9 +519,32 @@
           "notRecommended": {
             "type": "array",
             "items": {
-              "type": "string",
-              "description": "User's not allowed food",
-              "example": "яйца"
+              "type": "object",
+              "properties": {
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "зерновые"
+                  }
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Item's id",
+                  "example": "32143232436545474"
+                },
+                "title": {
+                  "type": "object",
+                  "properties": {
+                    "ru": {
+                      "type": "string"
+                    },
+                    "ua": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           },
           "email": {
@@ -556,9 +583,26 @@
               "bloodType": 1,
               "dailyLimit": 1226,
               "notRecommended": [
-                "зерновые",
-                "мучные"
-              ],
+                {
+                  "categories": [
+                    "зерновые"
+                  ],
+                  "_id": "32143232436545474",
+                  "title": {
+                    "ru": "Гречневая крупа (ядрица) зелёная",
+                    "ua": "Гречана крупа (ядриця) зелена"
+                  }
+                },
+                {
+                  "categories": [
+                    "зерновые"
+                  ],
+                  "_id": "32143232436545474",
+                  "title": {
+                    "ru": "Гречневые хлопья Myllyn Paras для каши",
+                    "ua": "Гречані пластівці Myllyn Paras для каші"
+                  }
+                }],
               "token": "aWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MG",
               "createdAt": "2021-07-25T07:07:45.846Z",
               "_id": "32143232436545474",
@@ -682,24 +726,62 @@
             "description": "User's daily limit",
             "example": "1164"
           },
-          "categoriesNotAllowed": {
+          "notRecommended": {
             "type": "array",
             "items": {
-              "type": "string",
-              "description": "User's not allowed food",
-              "example": "яйца"
+              "type": "object",
+              "properties": {
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "зерновые"
+                  }
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Item's id",
+                  "example": "32143232436545474"
+                },
+                "title": {
+                  "type": "object",
+                  "properties": {
+                    "ru": {
+                      "type": "string"
+                    },
+                    "ua": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           }
         },
         "example": {
           "target": {
             "dailyLimit": 1164,
-            "categoriesNotAllowed": [
-              "яйца",
-              "зерновые",
-              "мучные",
-              "молочные"
-            ]
+            "notRecommended": [
+              {
+                "categories": [
+                  "зерновые"
+                ],
+                "_id": "32143232436545474",
+                "title": {
+                  "ru": "Гречневая крупа (ядрица) зелёная",
+                  "ua": "Гречана крупа (ядриця) зелена"
+                }
+              },
+              {
+                "categories": [
+                  "зерновые"
+                ],
+                "_id": "32143232436545474",
+                "title": {
+                  "ru": "Гречневые хлопья Myllyn Paras для каши",
+                  "ua": "Гречані пластівці Myllyn Paras для каші"
+                }
+              }]
           }
         }
       }
