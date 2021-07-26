@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="5e891512-b8f4-4d1d-aaba-0e138fc889fb" name="Default Changelist" comment="package before start" />
+=======
+    <list default="true" id="5e891512-b8f4-4d1d-aaba-0e138fc889fb" name="Default Changelist" comment="package before start">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +39,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -46,6 +53,7 @@
       <updated>1627070122554</updated>
       <workItem from="1627070126719" duration="561000" />
       <workItem from="1627110301339" duration="19000" />
+      <workItem from="1627322279187" duration="90000" />
     </task>
     <task id="LOCAL-00001" summary="package before start">
       <created>1627070578084</created>
