@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e891512-b8f4-4d1d-aaba-0e138fc889fb" name="Default Changelist" comment="package before start">
-      <change beforePath="$PROJECT_DIR$/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/swagger.json" afterDir="false" />
-    </list>
+    <list default="true" id="5e891512-b8f4-4d1d-aaba-0e138fc889fb" name="Default Changelist" comment="package before start" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +50,7 @@
       <workItem from="1627110301339" duration="19000" />
       <workItem from="1627318240406" duration="15000" />
       <workItem from="1627318270617" duration="2000" />
-      <workItem from="1627318289583" duration="485000" />
+      <workItem from="1627318289583" duration="842000" />
     </task>
     <task id="LOCAL-00001" summary="package before start">
       <created>1627070578084</created>
