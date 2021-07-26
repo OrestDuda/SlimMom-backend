@@ -14,10 +14,12 @@ const getProducts = async (query) => {
     },
     { "title.ru": 1 }
   );
-  if (!matched) {
-    throw new errors.ProjectErrors("Nothing matching found");
-  }
+
   return matched;
+};
+const getAllProducts = async () => {
+  const fullCatalogue = await Product.find({});
+  return fullCatalogue;
 };
 
 const getFoodItems = async (date, userId) => {
@@ -81,4 +83,5 @@ module.exports = {
   getProducts,
   removeFoodItem,
   addFoodItem,
+  getAllProducts,
 };

@@ -281,7 +281,7 @@
             "content": {}
           },
           "400": {
-            "description": "Bad request (invalid request body)",
+            "description": "Bad request",
             "content": {}
           },
           "401": {
@@ -317,7 +317,7 @@
             }
           },
           "400": {
-            "description": "Bad request (invalid request body)",
+            "description": "Bad request",
             "content": {}
           },
           "401": {
@@ -330,7 +330,7 @@
     "/catalogue": {
       "get": {
         "tags": ["Catalogue"],
-        "summary": "Search for food item in DB",
+        "summary": "Searches food item matching query in DB",
         "parameters": [
           {
             "in": "query",
@@ -353,8 +353,31 @@
             }
           },
           "400": {
-            "description": "Bad request (invalid request body)",
+            "description": "Bad request (invalid search query)",
             "content": {}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/catalogue/all": {
+      "get": {
+        "tags": ["Catalogue"],
+        "summary": "Get full catalogue of products",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllProductsResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Not Authorized",
@@ -675,6 +698,99 @@
             }]
           }
         },
+      "AllProductsResponse": {
+        "type": "object",
+        "properties": {
+          "fullCatalogue": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "groupBloodNotAllowed": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Product ID",
+                  "example": "32143232436545474"
+                },
+                "weight": {
+                  "type": "number"
+                },
+                "calories": {
+                  "type": "number"
+                },
+                "title": {
+                  "type": "object",
+                  "properties": {
+                    "ru": {
+                      "type": "string",
+                      "description": "Product Name",
+                      "example": "Яйцо куриное (желток сухой)"
+                    },
+                    "ua": {
+                      "type": "string",
+                      "description": "Product Name",
+                      "example": "Яйцо куриное (желток сухой)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "fullCatalogue": [
+            {
+              "categories": [
+                "яйца"
+              ],
+              "groupBloodNotAllowed": [
+                null,
+                true,
+                false,
+                false,
+                false
+              ],
+              "_id": "5d51694802b2373622ff5534",
+              "weight": 100,
+              "title": {
+                "ru": "Яйцо индюшиное",
+                "ua": "Яйце індиче"
+              },
+              "calories": 165
+            },
+            {
+              "categories": [
+                "яйца"
+              ],
+              "groupBloodNotAllowed": [
+                null,
+                true,
+                false,
+                false,
+                false
+              ],
+              "_id": "5d51694802b2373622ff552e",
+              "weight": 100,
+              "title": {
+                "ru": "Омлет из взбитых сливок",
+                "ua": "Омлет зі збитих вершків"
+              },
+              "calories": 257
+            }
+          ]
+        }
+      },
       "CalcResponse": {
         "type": "object",
         "properties": {
