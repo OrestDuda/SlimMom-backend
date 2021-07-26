@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e891512-b8f4-4d1d-aaba-0e138fc889fb" name="Default Changelist" comment="package before start">
-      <change beforePath="$PROJECT_DIR$/.env.template" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/calculatorValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/calculatorValidation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +39,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -51,6 +53,9 @@
       <updated>1627070122554</updated>
       <workItem from="1627070126719" duration="561000" />
       <workItem from="1627110301339" duration="19000" />
+      <workItem from="1627318240406" duration="15000" />
+      <workItem from="1627318270617" duration="2000" />
+      <workItem from="1627318289583" duration="181000" />
     </task>
     <task id="LOCAL-00001" summary="package before start">
       <created>1627070578084</created>
