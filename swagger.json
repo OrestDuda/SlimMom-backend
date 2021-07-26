@@ -1,0 +1,712 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Slim Mom",
+    "description": "Team1 Project Docs"
+  },
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "servers": [{ "url": "http://localhost:8083/api" }],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "Journal",
+      "description": "Journal endpoints"
+    },
+    {
+      "name": "Public",
+      "description": "Public endpoints"
+    },
+    {
+      "name": "Calculator",
+      "description": "Calculator endpoints"
+    },
+    {
+      "name": "Catalogue",
+      "description": "Catalogue endpoints"
+    }
+  ],
+  "paths": {
+    "/users/registration": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User registration",
+        "parameters": [],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "409": {
+            "description": "Provided email already exists",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "Login's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User logout",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/current": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "User current",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurrentUserResponse"
+              }
+            }}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/public": {
+      "patch": {
+        "tags": ["Public"],
+        "summary": "Home page for not auth visitors",
+        "parameters": [],
+        "requestBody": {
+          "description": "Calculator's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculatorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalcResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/calculator": {
+      "patch": {
+        "tags": ["Calculator"],
+        "summary": "User calculator, for new user - all input is required. If user has daily limit already - only weight is required to get updated calculation of daily limit.",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Calculator's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculatorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalcResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/journal": {
+      "post": {
+        "tags": ["Journal"],
+        "summary": "Add food item eaten on current day",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Food item object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddItemRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/journal/{forDay}/{foodItemId}": {
+      "delete": {
+        "tags": ["Journal"],
+        "summary": "Delete food item eaten on given day, if date not provided current day will be used",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "forDay",
+            "required": false,
+            "type": "string",
+            "description": "Date YYYY-M-D"
+          },
+          {
+            "in": "path",
+            "name": "foodItemId",
+            "required": true,
+            "type": "string",
+            "description": "Food item ID"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/journal/{forDay}": {
+      "get": {
+        "tags": ["Journal"],
+        "summary": "List food items eaten on given day",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "forDay",
+            "required": true,
+            "type": "string",
+            "description": "Date YYYY-M-D"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MealResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Nor Authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/catalogue": {
+      "get": {
+        "tags": ["Catalogue"],
+        "summary": "Search for food item in DB",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "required": true,
+            "type": "string",
+            "description": "User input"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["email", "password", "name"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password, length 8",
+            "example": "12345678"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User Name"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password, length 8",
+            "example": "12345678"
+          }
+        }
+      },
+      "CalculatorRequest": {
+        "type": "object",
+        "required": ["currentWeight", "height","age", "desiredWeight", "bloodType"],
+        "properties": {
+          "currentWeight": {
+            "type": "number",
+            "description": "User's currentWeight",
+            "example": "70"
+          },
+          "height": {
+            "type": "integer",
+            "description": "User's height",
+            "example": "180"
+          },
+          "age": {
+            "type": "integer",
+            "description": "User's age",
+            "example": "40"
+          },
+          "desiredWeight": {
+            "type": "number",
+            "description": "User's desiredWeight",
+            "example": "40"
+          },
+          "bloodType": {
+            "type": "integer",
+            "description": "User's bloodType, types: 1/2/3/4",
+            "example": "1"
+          }
+        }
+      },
+      "AddItemRequest": {
+        "type": "object",
+        "required": ["foodItem", "portionSize"],
+        "properties": {
+          "foodItem": {
+            "type": "string",
+            "description": "Eaten item",
+            "example": "Яйцо куриное (желток сухой)"
+          },
+          "portionSize": {
+            "type": "number",
+            "description": "Eaten item, weight in gr",
+            "example": "60"
+          }
+        }
+      },
+      "AuthResponse": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "User's token",
+              "example": "aWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MG"
+            },
+            "_id": {
+              "type": "string",
+              "description": "User's id",
+              "example": "32143232436545474"
+            },
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "User Name"
+            }
+          },
+          "example": {
+            "user": {
+              "token": "aWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MG",
+              "_id": "32143232436545474",
+              "email": "user@example.com",
+              "name": "User Name"
+            }
+        }
+      },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "integer",
+            "description": "User's height",
+            "example": "190"
+          },
+          "age": {
+            "type": "integer",
+            "description": "User's age",
+            "example": "40"
+          },
+          "currentWeight": {
+            "type": "integer",
+            "description": "User's current weight",
+            "example": "90"
+          },
+          "desiredWeight": {
+            "type": "integer",
+            "description": "User's desired weight",
+            "example": "80"
+          },
+          "bloodType": {
+            "type": "integer",
+            "description": "User's blood type",
+            "example": "1"
+          },
+          "dailyLimit": {
+            "type": "integer",
+            "description": "User's daily limit",
+            "example": "2050"
+          },
+          "notRecommended": {
+            "type": "array",
+            "items": {
+              "type": "string"
+                }
+              },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User Name"
+          },
+          "token": {
+            "type": "string",
+            "description": "User's token",
+            "example": "aWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MG"
+          },
+          "_id": {
+            "type": "string",
+            "description": "User's id",
+            "example": "32143232436545474"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "User was created at",
+            "example": "2021-07-25T07:07:45.846Z"
+          }
+        },
+        "example": {
+          "user": {
+            "currentUser": {
+              "height": 190,
+              "age": 40,
+              "currentWeight": 90,
+              "desiredWeight": 80,
+              "bloodType": 1,
+              "dailyLimit": 1226,
+              "notRecommended": [
+                    "зерновые"
+                  ],
+              "token": "aWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MG",
+              "createdAt": "2021-07-25T07:07:45.846Z",
+              "_id": "32143232436545474",
+              "email": "user@example.com",
+              "name": "User Name"
+            }
+          }
+        }
+      },
+      "MealResponse": {
+        "type": "object",
+        "properties": {
+          "onDay": {
+            "type": "string",
+            "description": "Date for this day",
+            "example": "2021-7-25"
+          },
+          "_id": {
+            "type": "string",
+            "description": "Entry ID",
+            "example": "32143232436545474"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of user to whom the entry belongs to",
+            "example": "32143232436545474"
+          },
+          "food": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "foodItem": {
+                  "type": "string",
+                  "description": "Food item name",
+                  "example": "Яйцо куриное (желток сухой)"
+                },
+                "portionSize": {
+                  "type": "number",
+                  "description": "Food item weight",
+                  "example": "60"
+                },
+                "kcal": {
+                  "type": "number",
+                  "description": "Food item kcal",
+                  "example": "60"
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "Food item ID",
+                  "example": "32143232436545474"
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "dayJournal": {
+            "onDay": "2021-7-25",
+            "_id": "32143232436545474",
+            "userId": "32143232436545474",
+            "food": [
+              {
+                "foodItem": "Яйцо куриное (желток сухой)",
+                "portionSize": 60,
+                "kcal": 373.8,
+                "_id": "32143232436545474"
+              }
+            ]
+          }
+        }
+      },
+      "ProductsResponse": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Product ID",
+                  "example": "32143232436545474"
+                },
+                "title": {
+                  "type": "object",
+                  "properties":{
+                  "ru": {
+                    "type": "string",
+                    "description": "Product Name",
+                    "example": "Яйцо куриное (желток сухой)"
+                }
+              }
+            }
+          }
+            }
+          }
+        },
+        "example": {
+          "results": [
+            {
+              "_id": "32143232436545474",
+              "title": {
+                "ru": "Яйцо куриное (желток сухой)"
+              }
+            },
+            {
+              "_id": "32143232436545404",
+              "title": {
+                "ru": "Яйцо куриное (вареное всмятку)"
+              }
+            }]
+          }
+        },
+      "CalcResponse": {
+        "type": "object",
+        "properties": {
+          "dailyLimit": {
+            "type": "number",
+            "description": "User's daily limit",
+            "example": "1164"
+          },
+          "notRecommendedCategories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+                    "example": "зерновые"
+                  }
+                }
+              },
+        "example": {
+          "target": {
+            "dailyLimit": 1164,
+            "notRecommended": [
+                  "зерновые"
+                ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
