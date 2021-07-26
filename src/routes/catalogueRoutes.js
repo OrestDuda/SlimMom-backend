@@ -8,5 +8,6 @@ const { asyncWrapper } = require("../helpers/asyncWrapper");
 router.use(authMiddleware);
 
 router.get("/", asyncWrapper(journal.getProductsController));
+router.get("/all", asyncWrapper(journal.getAllProductsController));
 
 module.exports = router;

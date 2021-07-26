@@ -12,6 +12,11 @@ const getProductsController = async (req, res, next) => {
   return res.status(200).json({ results });
 };
 
+const getAllProductsController = async (req, res, next) => {
+  const fullCatalogue = await journal.getAllProducts();
+  return res.status(200).json({ fullCatalogue });
+};
+
 const removeFoodItemController = async (req, res, next) => {
   const { _id: userId } = req.user;
   await journal.removeFoodItem(req.params, userId);
@@ -29,4 +34,5 @@ module.exports = {
   getProductsController,
   removeFoodItemController,
   addFoodItemController,
+  getAllProductsController,
 };
