@@ -5,7 +5,7 @@ module.exports = {
   addItemValidation: async (req, res, next) => {
     const journalValidation = Joi.object({
       foodItem: Joi.string().required(),
-      portionSize: Joi.number().required(),
+      portionSize: Joi.number().positive().required(),
     });
 
     const validationResult = await journalValidation.validate(req.body);
