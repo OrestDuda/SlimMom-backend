@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/OrestDuda/SlimMom-backend#readme",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "cross-env": "7.0.3",

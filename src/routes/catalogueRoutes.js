@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const journal = require("../controllers/journalController");
+const catalogue = require("../controllers/catalogueController");
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const { asyncWrapper } = require("../helpers/asyncWrapper");
 
 router.use(authMiddleware);
 
-router.get("/", asyncWrapper(journal.getProductsController));
-router.get("/all", asyncWrapper(journal.getAllProductsController));
+router.get("/", asyncWrapper(catalogue.searchCatalogueController));
+router.get("/all", asyncWrapper(catalogue.getAllCatalogueController));
 
 module.exports = router;

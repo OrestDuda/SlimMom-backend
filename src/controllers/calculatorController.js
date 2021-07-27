@@ -6,8 +6,8 @@ const publicCalcController = async (req, res, next) => {
 };
 
 const userCalcController = async (req, res, next) => {
-  const userData = await calc.userCalc(req.body, req.user);
-  return res.status(200).json({ target: userData });
+  const currentUser = await calc.userCalc(req.body, req.user);
+  return res.status(200).json({ currentUser });
 };
 
 module.exports = {

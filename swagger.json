@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "title": "Slim Mom",
     "description": "Team1 Project Docs"
   },
@@ -205,7 +205,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CalcResponse"
+                  "$ref": "#/components/schemas/CurrentUserResponse"
                 }
               }
             }
@@ -224,7 +224,7 @@
     "/journal": {
       "post": {
         "tags": ["Journal"],
-        "summary": "Add food item eaten on current day",
+        "summary": "Add food for given day",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
@@ -241,8 +241,14 @@
         "responses": {
           "201": {
             "description": "Successful operation",
-            "content": {}
-          },
+            "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealResponse"
+              }
+            }
+          }
+        },
           "400": {
             "description": "Bad request (invalid request body)",
             "content": {}
@@ -257,12 +263,12 @@
     "/journal/{forDay}/{foodItemId}": {
       "delete": {
         "tags": ["Journal"],
-        "summary": "Delete food item eaten on given day, if date not provided current day will be used",
+        "summary": "Delete food item from journal for given day",
         "parameters": [
           {
             "in": "path",
             "name": "forDay",
-            "required": false,
+            "required": true,
             "type": "string",
             "description": "Date YYYY-M-D"
           },
@@ -301,7 +307,7 @@
             "name": "forDay",
             "required": true,
             "type": "string",
-            "description": "Date YYYY-M-D"
+            "description": "Date YYYY-MM-DD"
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -459,7 +465,7 @@
       },
       "AddItemRequest": {
         "type": "object",
-        "required": ["foodItem", "portionSize"],
+        "required": ["foodItem", "portionSize", "onDay"],
         "properties": {
           "foodItem": {
             "type": "string",
@@ -470,6 +476,11 @@
             "type": "number",
             "description": "Eaten item, weight in gr",
             "example": "60"
+          },
+          "onDay": {
+            "type": "string",
+            "description": "Adding for the indicated day",
+            "example": "2021-07-27"
           }
         }
       },
@@ -572,7 +583,6 @@
           }
         },
         "example": {
-          "user": {
             "currentUser": {
               "height": 190,
               "age": 40,
@@ -589,7 +599,6 @@
               "email": "user@example.com",
               "name": "User Name"
             }
-          }
         }
       },
       "MealResponse": {
