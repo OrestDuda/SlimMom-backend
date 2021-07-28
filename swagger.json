@@ -270,7 +270,7 @@
             "name": "forDay",
             "required": true,
             "type": "string",
-            "description": "Date YYYY-M-D"
+            "description": "Date YYYY-MM-DD"
           },
           {
             "in": "path",
