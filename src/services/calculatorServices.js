@@ -5,7 +5,7 @@ const { getDailyLimit, getUniqueCategories } = require("../helpers/helpers");
 const {
   newEntryValidation,
   updateEntryValidation,
-} = require("../helpers/calculatorValidation");
+} = require("../helpers/validationSchemas");
 
 const publicCalc = async (body) => {
   const validated = newEntryValidation.validate(body);
@@ -28,7 +28,7 @@ const publicCalc = async (body) => {
 };
 
 const userCalc = async (body, userID) => {
-  const userFound = await User.findOne({ _id: userID });
+  const userFound = await User.findOne({ _id: userID }, { password: 0 });
   if (!userFound) {
     throw new errors.ProjectErrors("No such user");
   }
@@ -42,7 +42,7 @@ const userCalc = async (body, userID) => {
     userFound.dailyLimit = target.dailyLimit;
     userFound.notRecommended = target.notRecommendedCategories;
     await userFound.save();
-    return target;
+    return userFound;
   }
   const validated = updateEntryValidation.validate(body);
   if (validated.error) {
@@ -72,10 +72,7 @@ const userCalc = async (body, userID) => {
     userFound.bloodType = body.bloodType;
     userFound.notRecommended = notRecommendedCategories;
     await userFound.save();
-    return {
-      dailyLimit,
-      notRecommendedCategories,
-    };
+    return userFound;
   }
   userFound.currentWeight = body.currentWeight;
   userFound.height = body.height || userFound.height;
@@ -83,9 +80,7 @@ const userCalc = async (body, userID) => {
   userFound.desiredWeight = body.desiredWeight;
   userFound.dailyLimit = dailyLimit;
   await userFound.save();
-  return {
-    dailyLimit,
-  };
+  return userFound;
 };
 
 module.exports = {

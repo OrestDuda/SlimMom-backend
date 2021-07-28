@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require("joi").extend(require("@joi/date"));
 const errors = require("../helpers/errors");
 
 module.exports = {
@@ -6,6 +6,7 @@ module.exports = {
     const journalValidation = Joi.object({
       foodItem: Joi.string().required(),
       portionSize: Joi.number().positive().required(),
+      onDay: Joi.date().format("YYYY-MM-DD").required(),
     });
 
     const validationResult = await journalValidation.validate(req.body);

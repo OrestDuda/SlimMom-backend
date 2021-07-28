@@ -10,14 +10,14 @@ const {
 
 router.use(authMiddleware);
 
-router.get("/:forDay", asyncWrapper(journal.getFoodItemsController));
+router.get("/:forDay", asyncWrapper(journal.getJournalController));
 router.post(
   "/",
   addItemValidation,
   asyncWrapper(journal.addFoodItemController)
 );
 router.delete(
-  "/:forDay?/:foodItemId",
+  "/:forDay/:foodItemId",
   asyncWrapper(journal.removeFoodItemController)
 );
 
