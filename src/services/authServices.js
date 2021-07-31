@@ -24,10 +24,11 @@ const registration = async (body) => {
     process.env.JWT_SECRET
   );
   await User.updateOne({ email: newUser.email }, { $set: { token: token } });
-  return User.findOne(
-    { email: newUser.email },
-    { email: 1, name: 1, token: 1 }
-  );
+  // return User.findOne(
+  //   { email: newUser.email },
+  //   { email: 1, name: 1, token: 1 }
+  // );
+  return User.findOne({ email: newUser.email }, { password: 0 });
 };
 
 const login = async (body) => {
@@ -40,7 +41,8 @@ const login = async (body) => {
   }
   const token = jwt.sign({ _id: userExist._id }, process.env.JWT_SECRET);
   await User.updateOne({ email: body.email }, { $set: { token: token } });
-  return User.findOne({ email: body.email }, { email: 1, name: 1, token: 1 });
+  // return User.findOne({ email: body.email }, { email: 1, name: 1, token: 1 });
+  return User.findOne({ email: body.email }, { password: 0 });
 };
 
 const logout = async (userId) => {

@@ -15,7 +15,7 @@ const removeFoodItemController = async (req, res, next) => {
 const addFoodItemController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const updatedDayJournal = await journal.addFoodItem(req.body, userId);
-  return res.status(201).json({ updatedDayJournal });
+  return res.status(201).json({ dayJournal: updatedDayJournal });
 };
 
 module.exports = {

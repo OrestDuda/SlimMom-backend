@@ -7,7 +7,7 @@ const publicCalcController = async (req, res, next) => {
 
 const userCalcController = async (req, res, next) => {
   const currentUser = await calc.userCalc(req.body, req.user);
-  return res.status(200).json({ currentUser });
+  return res.status(200).json({ user: currentUser });
 };
 
 module.exports = {

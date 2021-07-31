@@ -17,7 +17,7 @@ const logoutController = async (req, res, next) => {
 
 const currentController = async (req, res, next) => {
   const currentUser = await auth.current(req.user._id);
-  return res.status(200).json({ currentUser });
+  return res.status(200).json({ user: currentUser });
 };
 
 module.exports = {
