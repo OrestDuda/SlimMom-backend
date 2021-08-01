@@ -11,7 +11,7 @@ const getJournal = async (date, userId) => {
   }
   const dateExists = await Meal.findOne({ onDay: date, userId: userId });
   if (!dateExists) {
-    throw new errors.ProjectErrors("No data for selected day and user");
+    return false;
   }
   return dateExists;
 };
