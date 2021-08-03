@@ -42,7 +42,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegistrationRequest"
+                "$ref": "#/components/schemas/CurrentUserResponse"
               }
             }
           }
@@ -91,7 +91,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthResponse"
+                  "$ref": "#/components/schemas/CurrentUserResponse"
                 }
               }
             }
@@ -185,7 +185,7 @@
     "/calculator": {
       "patch": {
         "tags": ["Calculator"],
-        "summary": "User calculator, for new user - all input is required. If user has daily limit already - only weight is required to get updated calculation of daily limit.",
+        "summary": "Calculator for registered user",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
@@ -322,8 +322,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request",
+          "204": {
+            "description": "No data found",
             "content": {}
           },
           "401": {
@@ -395,43 +395,6 @@
   },
   "components": {
     "schemas": {
-      "RegistrationRequest": {
-        "type": "object",
-        "required": ["email", "password", "name"],
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
-          },
-          "password": {
-            "type": "string",
-            "description": "User's password, length 8",
-            "example": "12345678"
-          },
-          "name": {
-            "type": "string",
-            "description": "User's name",
-            "example": "User Name"
-          }
-        }
-      },
-      "LoginRequest": {
-        "type": "object",
-        "required": ["email", "password"],
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
-          },
-          "password": {
-            "type": "string",
-            "description": "User's password, length 8",
-            "example": "12345678"
-          }
-        }
-      },
       "CalculatorRequest": {
         "type": "object",
         "required": ["currentWeight", "height","age", "desiredWeight", "bloodType"],

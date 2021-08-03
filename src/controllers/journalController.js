@@ -4,12 +4,7 @@ const getJournalController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const getDay = await journal.getJournal(req.params.forDay, userId);
   if (!getDay) {
-    return res.status(200).json({
-      dayJournal: {
-        onDay: null,
-        food: [],
-      },
-    });
+    return res.status(204).json({});
   }
   res.status(200).json({ dayJournal: getDay });
 };
