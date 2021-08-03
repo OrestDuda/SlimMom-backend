@@ -24,10 +24,6 @@ const registration = async (body) => {
     process.env.JWT_SECRET
   );
   await User.updateOne({ email: newUser.email }, { $set: { token: token } });
-  // return User.findOne(
-  //   { email: newUser.email },
-  //   { email: 1, name: 1, token: 1 }
-  // );
   return User.findOne({ email: newUser.email }, { password: 0 });
 };
 
