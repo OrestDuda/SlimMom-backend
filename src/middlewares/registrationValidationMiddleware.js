@@ -7,7 +7,7 @@ module.exports = {
       password: Joi.string()
         .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
         .min(8)
-        .max(8)
+        .max(22)
         .required(),
       email: Joi.string().email({ minDomainSegments: 2 }).required(),
       name: Joi.string().min(3).max(80).required(),
