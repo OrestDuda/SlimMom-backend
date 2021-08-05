@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e891512-b8f4-4d1d-aaba-0e138fc889fb" name="Default Changelist" comment="package before start" />
-
+    <list default="true" id="5e891512-b8f4-4d1d-aaba-0e138fc889fb" name="Default Changelist" comment="fix swagger.json">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/registrationValidationMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/registrationValidationMiddleware.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +41,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -52,7 +57,10 @@
       <workItem from="1627318240406" duration="15000" />
       <workItem from="1627318270617" duration="2000" />
       <workItem from="1627318289583" duration="842000" />
-
+      <workItem from="1627467522779" duration="249000" />
+      <workItem from="1627467816996" duration="608000" />
+      <workItem from="1627493882551" duration="48000" />
+      <workItem from="1628153498046" duration="103000" />
     </task>
     <task id="LOCAL-00001" summary="package before start">
       <created>1627070578084</created>
@@ -68,7 +76,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627070661977</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix swagger.json">
+      <created>1627467661965</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1627467661966</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -88,6 +103,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="package before start" />
-    <option name="LAST_COMMIT_MESSAGE" value="package before start" />
+    <MESSAGE value="fix swagger.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix swagger.json" />
   </component>
 </project>

@@ -9,9 +9,7 @@ module.exports = {
         .min(8)
         .max(8)
         .required(),
-      email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
-        .required(),
+      email: Joi.string().email({ minDomainSegments: 2 }).required(),
       name: Joi.string().min(3).max(80).required(),
     });
 
