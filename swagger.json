@@ -42,7 +42,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CurrentUserResponse"
+                "$ref": "#/components/schemas/RegistrationRequest"
               }
             }
           }
@@ -53,7 +53,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthResponse"
+                  "$ref": "#/components/schemas/CurrentUserResponse"
                 }
               }
             }
@@ -447,39 +447,6 @@
           }
         }
       },
-      "AuthResponse": {
-          "type": "object",
-          "properties": {
-            "token": {
-              "type": "string",
-              "description": "User's token",
-              "example": "aWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MG"
-            },
-            "_id": {
-              "type": "string",
-              "description": "User's id",
-              "example": "32143232436545474"
-            },
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "User Name"
-            }
-          },
-          "example": {
-            "user": {
-              "token": "aWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MGaWQiOiI2MG",
-              "_id": "32143232436545474",
-              "email": "user@example.com",
-              "name": "User Name"
-            }
-        }
-      },
       "CurrentUserResponse": {
         "type": "object",
         "properties": {
@@ -785,6 +752,43 @@
             "notRecommended": [
                   "зерновые"
                 ]
+          }
+        }
+      },
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["email", "password", "name"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password, length 8",
+            "example": "12345678"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User Name"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password, length 8",
+            "example": "12345678"
           }
         }
       }
